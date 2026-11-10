@@ -7,31 +7,6 @@ static const int MIN_POS   = 0;
 static const int MAX_POS   = 31;
 static const int SPACING   = 4;
 
-int main(void) {
-  uint32_t x;
-  int32_t x_ext;
-  int display_width, set_width;
-
-  for (;;) {
-    printf("Enter x: ");
-    scanf("%d", &x);
-
-    if (x == 0) { return 0; }
-
-    printf("Enter display width: ");
-    scanf("%d", &display_width);
-
-    print_binary(x, display_width);
-
-    printf("Enter set width: ");
-    scanf("%d", &set_width);
-
-    x_ext = sign_extend(x, set_width);
-
-    print_binary(x_ext, display_width);
-    printf("Sign extended: %d\n", x_ext);
-  }
-}
 
 static bool check_bounds(int value, int min, int max) {
   if (value < min || value > max) { return false; }
