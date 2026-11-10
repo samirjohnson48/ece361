@@ -9,6 +9,7 @@ static const int SPACING   = 4;
 
 int main(void) {
   uint32_t x, value, result;
+  int32_t x_ext;
   int display_width, pos, set_width;
 
   for (;;) {
@@ -22,16 +23,13 @@ int main(void) {
 
     print_binary(x, display_width);
 
-    printf("Enter set pos: ");
-    scanf("%d", &pos);
     printf("Enter set width: ");
     scanf("%d", &set_width);
-    printf("Enter set value: ");
-    scanf("%d", &value);
 
-    result = set_field(x, pos, set_width, value);
+    x_ext = sign_extend(x, set_width);
 
-    print_binary(result, display_width);
+    print_binary(x_ext, display_width);
+    printf("Sign extended: %d\n", x_ext);
   }
 }
 
@@ -98,4 +96,17 @@ uint32_t set_field(uint32_t word, int pos, int width, uint32_t value) {
   uint32_t value_mask = get_field(value, 0, width) << pos;
 
   return cleared_word | value_mask;
+}
+
+int32_t sign_extend(uint32_t value, int width) {
+  if (!check_bounds(width, MIN_WIDTH, MAX_WIDTH)) {
+    log_failed_bounds(width, MIN_WIDTH, MAX_WIDTH, "width");
+    return 0;
+  }
+
+  uint32_t base = get_field(value, 0, width);
+  uint32_t mask = (base & 1 << (width - 1)) ? ~0 << width : 0;
+
+  int32_t result = base | mask;
+  return result;
 }
