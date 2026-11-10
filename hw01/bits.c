@@ -8,9 +8,9 @@ static const int MAX_POS   = 31;
 static const int SPACING   = 4;
 
 int main(void) {
-  uint32_t x, value, result;
+  uint32_t x;
   int32_t x_ext;
-  int display_width, pos, set_width;
+  int display_width, set_width;
 
   for (;;) {
     printf("Enter x: ");
