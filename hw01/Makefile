@@ -1,12 +1,15 @@
+CC     = gcc
+CFLAGS = -std=c11 -Wall -Wextra -g
+
 status: status.o bits.o
-	gcc -std=c11 -Wall -Wextra -o status status.o bits.o
+	$(CC) $(CFLAGS) -o $@ $^
 
-status.o: status.c status.h bits.h
-	gcc -std=c11 -Wall -Wextra -c status.c
+%.o: %.c %.h bits.h
+	$(CC) $(CFLAGS) -c $<
 
-bits: bits.o
-	gcc -std=c11 -Wall -Wextra -o bits bits.o
+%.o: %.c
+	$(CC) $(CFLAGS) -c %<
 
-bits.o: bits.c bits.h
-	gcc -std=c11 -Wall -Wextra -c bits.c
-
+clean:
+	rm -f *.o status
+.PHONY: clean

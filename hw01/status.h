@@ -12,7 +12,8 @@
 #define RESERVED_SIZE 1
 #define SETPOINT_SIZE 8
 
-#define INVALID_MODE  7;
+#define INVALID_MODE  7
+#define MAX_MODE      4
 
 #define RESERVED_VALUE 0;
 

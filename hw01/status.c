@@ -1,7 +1,9 @@
 #include <stdbool.h>
 #include "status.h"
 
-static const uint8_t MAX_MODE = 4;
+int main(void) {
+  return 0;
+}
 
 status_t status_unpack(uint16_t word) {
   status_t status;
@@ -12,7 +14,7 @@ status_t status_unpack(uint16_t word) {
   status.fault = get_field(word, FAULT_POS, FAULT_SIZE);
 
   uint32_t mode = get_field(word, MODE_POS, MODE_SIZE);
-  status.mode = mode <= MAX_MODE ? mode : INVALID_MODE;
+  status.mode = (mode <= MAX_MODE) ? mode : INVALID_MODE;
 
   uint32_t reserved = get_field(word, RESERVED_POS, RESERVED_SIZE);
   if (reserved) {
